@@ -1,0 +1,88 @@
+// Raymond Payne
+// QAP 1 Javascript Sept 29 2023
+// Question 1 part 1 & 2
+
+// Sample Node.js script demonstrating the use of core objects
+
+// 1. Global Object
+console.log('--- Global Object ---');
+console.log(global.process.version); // Access Node.js version
+global.myGlobalVar = 'Hello, Global!'; // Define a global variable
+console.log(myGlobalVar); // Access and log the global variable
+
+// 2. Process Object
+console.log('\n--- Process Object ---');
+console.log(process.env.NODE_ENV); // Access the NODE_ENV environment variable
+
+// Listening for process events
+process.on('exit', (code) => {
+  console.log(`Process exited with code ${code}`); // Log when the process exits
+});
+
+// Exiting the process after a delay
+setTimeout(() => {
+  process.exit(0); // Exit the process after a delay
+}, 2000);
+
+// 3. Console Object
+console.log('\n--- Console Object ---');
+console.log('This is a normal log message.'); // Log a normal message
+console.error('This is an error message.'); // Log an error message
+
+// 4. Buffer Object
+console.log('\n--- Buffer Object ---');
+const buffer = Buffer.from('Hello, Buffer!', 'utf-8'); // Create a Buffer from a string
+console.log(buffer.toString()); // Convert the Buffer to a string and log it
+buffer.write('Modified Buffer', 0, 15, 'utf-8'); // Modify the Buffer
+console.log(buffer.toString()); // Log the modified Buffer as a string
+
+// 5. Module Object
+console.log('\n--- Module Object ---');
+// Exporting a function from a module
+function greet(name) {
+  return `Hello, ${name}!`; // Define a greeting function
+}
+module.exports = greet; // Export the greet function from the module
+
+// 6. Exports Object
+console.log('\n--- Exports Object ---');
+// Exporting multiple values using exports
+exports.multiply = (a, b) => a * b; // Export a multiplication function
+exports.square = (x) => x * x; // Export a square function
+
+// 7. Require Function
+console.log('\n--- Require Function ---');
+// Requiring modules
+const fs = require('fs'); // Require the 'fs' module for file system operations
+const os = require('os'); // Require the 'os' module for operating system information
+console.log(`Home directory: ${os.homedir()}`); // Log the home directory
+console.log(`File exists: ${fs.existsSync('sample.txt')}`); // Check if a file exists
+
+// 8. __filename Variable
+console.log('\n--- __filename Variable ---');
+// Printing the current module's filename
+console.log(__filename); // Log the absolute path to the current module's file
+
+// 9. __dirname Variable
+console.log('\n--- __dirname Variable ---');
+// Printing the current module's directory
+console.log(__dirname); // Log the absolute path to the directory of the current module's file
+
+// 10. URL Module
+console.log('\n--- URL Module ---');
+// Parsing a URL
+const { URL } = require('url'); // Require the 'URL' class from the 'url' module
+const urlString = 'https://www.example.com:8080/path?param=value'; // Sample URL string
+const parsedUrl = new URL(urlString); // Parse the URL
+console.log(parsedUrl.hostname); // Log the hostname of the URL
+console.log(parsedUrl.pathname); // Log the pathname of the URL
+
+// 11. Querystring Module
+console.log('\n--- Querystring Module ---');
+// Parsing and stringifying query strings
+const querystring = require('querystring'); // Require the 'querystring' module
+const query = 'param1=value1&param2=value2'; // Sample query string
+const parsedQuery = querystring.parse(query); // Parse the query string
+console.log(parsedQuery); // Log the parsed query parameters
+const newQuery = querystring.stringify({ param3: 'value3', param4: 'value4' }); // Stringify an object into a query string
+console.log(newQuery); // Log the newly created query string
